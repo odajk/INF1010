@@ -1,21 +1,45 @@
 class StatiskTabell<T> implements Tabell<T> {//throws FullTabellUnntak UgyldigPlassUnntak{
-	StatiskTabell(int kapasitet){
-		T[] statiskTabell = new T[kapasitet]; 
 
+    private int storrelse;
+    private int kapasitet;
+    private boolean first = true; 
+    StatiskTabell(int kapasitet){
+	T[] statiskTabell =(T[]) new Object[kapasitet];
+	  
+    }
+
+    public int storrelse(){
+	return storrelse;
+
+    }
+    public boolean erTom(){
+	if (storrelse == 0)return true; 
+
+    }
+
+    public void settInn(T element){
+	if (first == true){
+	    storrelse = 0;
+	    first = false;  
+	    }
+	if (storrelse == kapasitet){
+	    throw new FullTabellUnntak;
 	}
-
-	public int storrelse(){
-
+        else{
+	    statiskTabell[storrelse] = element; 
+	    storrelse ++;
 	}
+	
 
-	public boolean erTom(){
-
+    }
+    public T hentFraPlass(int plass){
+	if (plass<storrelse||plass>storrelse){
+	    throw new  UgyldigPlassUnntak; 
+	   
 	}
-
-	public void settInn(T element){
-
+	else{
+	    return statiskTabell[plass];
 	}
-	public T hentFraPlass(int plass){
 		
-	}
+    }
 }
